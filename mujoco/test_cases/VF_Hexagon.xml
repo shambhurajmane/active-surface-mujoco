@@ -1,0 +1,304 @@
+<mujoco model="Variable_Friction_Gripper">
+
+  <compiler meshdir="assets" texturedir="assets"/>
+  <option integrator="implicitfast"/>
+
+  <asset>
+
+    <material name="mat_black" rgba="0 0 0 1" specular="0" reflectance="0.2" shininess="0.2" emission="0.2"/>
+    <material name="black" rgba="0.25 0.25 0.25 1"/>
+    <mesh name="motor"    file=".assets\VF_CAD\XM,H-430_idler.STL"    />
+    <mesh name="fr12"    file=".assets\VF_CAD\fr12_h101.STL"    />
+    <mesh name="finger" file=".assets\VF_CAD\VF_Finger.STL" />
+    <mesh name='finger_holder' file='.assets\VF_CAD\New_Part.STL' />
+    <mesh name='ball_bearing_carriage' file='.assets\VF_CAD\6725K410_BALL BEARING CARRIAGE.STL' />
+    <mesh name='ball_bearing_mover' file='.assets\VF_CAD\8438K400_CORROSION-RESISTANT BALL BEARING CARRIAGE.STL' />
+    <mesh name='base_plate' file='.assets\VF_CAD\basePlate_resolved.STL' />
+    <mesh name='pad_interface' file='.assets\VF_CAD\pad_interface.STL' />
+    <mesh name='HF_surface' file='.assets\VF_CAD\surface.STL' />
+    <mesh name='XL_motor' file='.assets\VF_CAD\XL-320.STL'    /> 
+    <mesh name='servo_clamp' file='.assets\VF_CAD\Servo_Clamp.STL'    />
+    <mesh name='finger_cam' file='.assets\VF_CAD\Finger_Cam_V0.STL'    /> 
+    <mesh name='Finger_insert' file='.assets\VF_CAD\Finger_insert.STL'    />
+    <mesh name='Motor_holder' file='.assets\VF_CAD\Motor_Holder.STL'  />
+    <mesh name='center_gear' file='.assets\VF_CAD\Lower_Gear.STL'  />
+    <mesh name="hexagon" file=".assets\test_objects\hex.stl" />
+    <mesh name="non_convex_part" file=".assets\test_objects\non-convex1.STL" scale="0.002 0.002 0.002"/>
+
+    <mesh name="Hexagon" file=".assets\test_objects\selected\hex.stl"  scale="0.01 0.01 0.01"  />
+
+  </asset>
+
+
+  <default>
+    <mesh scale="0.001 0.001 0.001"/>
+    <geom type="mesh" solref=".004 1"/>
+    <joint damping="1.084" armature="0.045" frictionloss="0.03"/>
+    <site group="5" type="sphere"/>
+    <position kp="21.1" ctrlrange="-3.141592 3.141592" forcerange="-50 50"/>
+    <default class="collision">
+      <geom group="3"/>
+      <default class="foot">
+        <geom mass="0" type="box"/>
+      </default>
+    </default>
+    <default class="visual">
+      <geom material="black" contype="0" conaffinity="0" group="2"/>
+    </default>
+  </default>
+
+  <!-- Optionally tune global defaults -->
+  <default>
+    <joint damping="1.0" limited="true"/>
+    <geom contype="1" conaffinity="1" rgba="0.8 0.6 0.4 1" solref="0.0005 1" solimp="0.99 0.999 0.001"/>
+  </default>
+
+  <worldbody>
+
+    <!-- # add 3d axis for visualization at the origin -->
+    <light diffuse=".5 .5 .5" pos="0 1 3" dir="0 0 -1"/>
+
+    <!-- Draw 3d x y z axis at origin -->
+    <body name="origin" pos="0 0 0">  
+      <geom type="cylinder" size="0.002 0.01" pos="0.005 0 0" euler="0 90 0" rgba="1 0 0 1"/> <!-- x axis in red -->
+      <geom type="cylinder" size="0.002 0.01" pos="0 0.005 0" euler="-90 0 0" rgba="0 1 0 1"/> <!-- y axis in green -->
+      <geom type="cylinder" size="0.002 0.01" pos="0 0 0.005" euler="0 0 0" rgba="0 0 1 1"/> <!-- z axis in blue --> 
+    </body>
+
+    <body name="worldbody" pos="0 0 0">
+      <geom type="plane" size="1 1 0.001" pos="0 0 0"  material="mat_black"/>
+      <geom type="box" size="0.1 0.1 0.06" pos="0 0.15 0.06" material="black"/>
+    </body>
+
+
+
+    <!-- Spawn a square object to be grasped (very low friction #"0.2 0.002 0.0001")-->
+    <!-- <body name="curr_object" pos="0.002 0.27 0.07" euler="90 0 0">
+      <joint type="free"/>
+      <geom type="box" size=".02 .02 .04" rgba="0 .9 0 1" friction="0.1 0.002 0.0001"/>  
+
+    </body> -->
+
+    <body name="curr_object" pos="0.002 0.27 0.07" euler="90 0 0">
+      <joint type="free"/>
+      <geom type="mesh" mesh="non_convex_part" name="non_convex_part_object" rgba="0 .9 0 1" friction="0.1 0.002 0.0001"/>  
+    </body>
+<!-- 
+    <body name="curr_object" pos="0.0 0.18 0.1802">
+      <joint type="free"/>
+
+      <geom
+        type="mesh"
+        mesh="Hexagon"
+        rgba="0 .9 0 1"
+        friction="0.1 0.002 0.0001"/>
+
+      <site
+        name="obj_frame"
+        pos="0 0 0"
+        rgba="0 1 0 1"
+        size=".002"/>
+    </body> -->
+
+
+    <!-- Setup the camera -->
+    <camera name="fixed_camera" pos="-0.003 0.572 0.467" xyaxes="-1.000 -0.004 0.000 0.002 -0.454 0.891"/>
+
+   <body name="stand" pos="0 0 0.25">
+      <geom type="box" size=".02 .01 .25" friction="0.1 0.002 0.0001" rgba="0.9 0.9 0.9 1"/>
+      <body name="motor_holder" pos="-0.075 0.061 0.068" euler="90 0 0" >
+        <joint name="hand_slide" type="slide" axis="0 1 0"
+                          range="-0.3 0.3" damping="20" armature="0.001" />
+        <geom type="mesh" mesh="Motor_holder" name="geom_motor_holder" rgba="0.5 0 0.5 1"/>
+        <body name="base_plate" pos="-0.017 -0.0075 0" euler="-90 0 0">
+          <geom type="mesh" mesh="base_plate" name="geom_base_plate" rgba="0.5 0 0.5 1"/>
+            
+            <body name="center_gear" pos="0.092 0.0 0.0468  " euler="-90 0 0">
+              <joint name="center_gear_joint" type="hinge" axis="0 0 1" range="-180 180"/>
+              <geom type="mesh" mesh="center_gear" name="geom_center_gear" pos="-0.01373 -0.014 -0.002" rgba="1 1 1 1"/>
+            </body>
+            
+          
+            <body name="ball_bearing_carriage_1" pos="0.002 0.004 0.013">
+            <geom type="mesh" mesh="ball_bearing_carriage" name="geom_ball_bearing_carriage1" rgba="1 1 1 1"/>
+                <body name="ball_bearing_mover_1" pos="0.040 0 -0.008" euler="0 -90 0">
+                <joint name="finger1_slide" type="slide" axis="0 0 1"
+                        range="-0.0402 0"  armature="0.001" />
+                <geom type="mesh" mesh="ball_bearing_mover" name="geom_ball_bearing_mover1" rgba="1 1 1 1"/>
+                    <body name="finger_holder_1" pos="0.055 0.013 0.035" euler="-90 0 90">
+                    <geom type="mesh" mesh="finger_holder" name="geom_finger_holder1" rgba="1 1 1 1"/>
+                        <body name="motor1" pos="0.005 0.0328 0.008" euler="90 0 0">
+                        <geom type="mesh" mesh="motor" name="geom_motor1" contype="0" conaffinity="0" rgba="0 0 0 1"/>
+                            <body name="fr12_1" pos="0.0143 0.0352 0.040" euler="0 90 0">  
+                            <joint name="finger1_to_motor1" type="hinge" axis="1 0 0" range="-70 70"/>
+                            <geom type="mesh" mesh="fr12" name="geom_fr12_1" pos="0 -0.0025 -0.012" contype="0" conaffinity="0" rgba="0 0 0 1"/> 
+                            <body name="finger1" pos="-0.008 0.028 -0.0195">
+                                <geom type="mesh" mesh="finger" name="geom_finger1" rgba="0.5 0 0.5 1"/>
+                                <body name="pad_interface_1" pos="0.0096 0 0.029" euler="90 90 0">
+                                    <geom type="mesh" mesh="pad_interface" name="geom_pad_interface1" rgba="1 1 1 1" />
+                                    <body name="HF_surface_1" pos="0 0.010 0.003">
+                                        <geom type="mesh" mesh="HF_surface" name="geom_HF_surface1" friction="3000.0 2 1" rgba="1 1 1 1"/>
+                                        <body name='XL_motor1' pos='0.030 -0.020 -0.011' euler='0 0 -90'>
+                                            <geom type='mesh' mesh='XL_motor' name='geom_XL_motor1' rgba="0 0 0 1"/>
+                                            <body name='servo_clamp1' pos='0.012 0.047 0.0105' euler='0 0 -90'>
+                                                <geom type='mesh' mesh='servo_clamp' name='geom_servo_clamp1' rgba="1 1 1 1"/>
+                                                <body name='finger_cam1' pos='0.020 0 0.023' euler='-90 0 0'>
+                                                    <!-- <joint name="finger_cam1_to_finger1" type="hinge" axis="0 1 0"
+                                                        range="-90 0" damping="0.5"/> -->
+                                                    <geom type='mesh' mesh='finger_cam' name='geom_finger_cam1' pos="-0.020 -0.005 -0.010" rgba="0.5 0 0.5 1"/>
+                                                    <site name="end1" pos="0.007 0.040 0.010" size="0.01"/>
+                                                    <body name='Finger_insert1' pos='-0.054 -0.0055 -0.015' euler='0 180 90'>
+                                                        <joint name="finger_insert_slide_1" type="slide" axis="0 0 1"
+                                                          range="-0.001 0.0038" damping="20.1"/>
+                                                        <geom type='mesh' mesh='Finger_insert' name='geom_Finger_insert1' friction="0.2 0.002 0.0001" rgba="0.5 0 0.5 1"/>
+                                                    </body>
+                                                </body>
+                                            </body>
+                                        </body> 
+                                    </body>
+                                </body>
+                            </body>
+                            </body>
+                        </body>
+                    </body>    
+                </body>
+            </body>
+            
+
+            <body name="ball_bearing_carriage_2" pos="0.182 0.004 0.08" euler="0 180 0">
+            <geom type="mesh" mesh="ball_bearing_carriage" name="geom_ball_bearing_carriage2" rgba="1 1 1 1"/>
+                <body name="ball_bearing_mover_2" pos="0.040 0 -0.008" euler="0 -90 0">
+                <joint name="finger2_slide" type="slide" axis="0 0 1"
+                        range="-0.0402 0" armature="0.001" />
+                <geom type="mesh" mesh="ball_bearing_mover" name="geom_ball_bearing_mover2" rgba="1 1 1 1"/>
+                    <body name="finger_holder_2" pos="0.055 0.013 0.035" euler="-90 0 90">
+                    <geom type="mesh" mesh="finger_holder" name="geom_finger_holder2" rgba="1 1 1 1"/>
+                        <body name="motor2" pos="0.005 0.0328 0.008" euler="90 0 0">
+                        <geom type="mesh" mesh="motor" name="geom_motor2" contype="0" conaffinity="0" rgba="0 0 0 1"/>
+                            <body name="fr12_2" pos="0.0143 0.0352 0.040" euler="0 90 0">  
+                            <joint name="finger2_to_motor2" type="hinge" axis="1 0 0" range="-70 70"/>
+                            <geom type="mesh" mesh="fr12" name="geom_fr12_2" pos="0 -0.0025 -0.012" contype="0" conaffinity="0" rgba="0 0 0 1"/> 
+                            <body name="finger2" pos="-0.008 0.028 -0.0195">
+                                <geom type="mesh" mesh="finger" name="geom_finger2" rgba="0.5 0 0.5 1"/>
+                                <body name="pad_interface_2" pos="0.0096 0 0.029" euler="90 90 0">
+                                    <geom type="mesh" mesh="pad_interface" name="geom_pad_interface2" rgba="1 1 1 1"/>
+                                    <body name="HF_surface_2" pos="0 0.010 0.003" >
+                                        <geom type="mesh" mesh="HF_surface" name="geom_HF_surface2" friction="3000.0 2 1" rgba="1 1 1 1"/>
+                                        <body name='XL_motor2' pos='0.030 -0.020 -0.011' euler='0 0 -90'>
+                                            <geom type='mesh' mesh='XL_motor' name='geom_XL_motor2' rgba="0 0 0 1"/>
+                                            <body name='servo_clamp2' pos='0.012 0.047 0.0105' euler='0 0 -90'>
+                                                <geom type='mesh' mesh='servo_clamp' name='geom_servo_clamp2' rgba="1 1 1 1"/>
+                                                <body name='finger_cam2' pos='0.020 0 0.023' euler='-90 0 0'>
+                                                    <!-- <joint name="finger_cam1_to_finger1" type="hinge" axis="0 1 0"
+                                                        range="-90 0" damping="0.5"/> -->
+                                                    <geom type='mesh' mesh='finger_cam' name='geom_finger_cam2' pos="-0.020 -0.005 -0.010" rgba="0.5 0 0.5 1"/>
+                                                    <site name="end2" pos="0.007 0.040 0.010" size="0.01"/>
+                                                    <body name='Finger_insert2' pos='-0.054 -0.0055 -0.015' euler='0 180 90'>
+                                                        <joint name="finger_insert_slide_2" type="slide" axis="0 0 1"
+                                                          range="-0.001 0.0038" damping="20.1"/>
+                                                        <geom type='mesh' mesh='Finger_insert' name='geom_Finger_insert2' friction="0.2 0.002 0.0001" rgba="0.5 0 0.5 1"/>
+                                                    </body>
+                                                </body>
+                                            </body>
+                                        </body> 
+                                    </body>
+                                </body>
+                            </body>
+                            </body>
+                        </body>
+                    </body>    
+                </body>
+            </body>
+
+        </body>
+      </body>
+    </body>
+
+    
+
+
+
+
+  </worldbody>
+
+
+  <option integrator="Euler"
+        solver="Newton"
+        cone="elliptic"
+        impratio="20"
+        iterations="200"
+        noslip_iterations="20"
+  />
+
+  <!-- <option integrator="Euler"
+        solver="Newton"
+        cone="elliptic"
+        impratio="20"
+        tolerance="1e-9"
+        timestep="0.001"
+        noslip_iterations="20"
+        iterations="200" /> -->
+
+  <contact>
+    <exclude body1="center_gear" body2="base_plate"/>
+    <exclude body1="center_gear" body2="motor_holder"/>
+    <exclude body1="center_gear" body2="ball_bearing_carriage_2"/>
+    <exclude body1="center_gear" body2="ball_bearing_carriage_1"/>
+    <exclude body1="ball_bearing_carriage_1" body2="ball_bearing_mover_1"/>
+    <exclude body1="fr12_1" body2="motor1"/>
+    <exclude body1="Finger_insert1" body2="HF_surface_1"/>
+    <exclude body1="Finger_insert1" body2="pad_interface_1"/>
+
+    <exclude body1="ball_bearing_carriage_2" body2="ball_bearing_mover_2"/>
+    <exclude body1="fr12_2" body2="motor2"/>
+    <exclude body1="Finger_insert2" body2="HF_surface_2"/>
+    <exclude body1="Finger_insert2" body2="pad_interface_2"/>
+
+
+    <exclude body1="finger_holder_2" body2="finger_holder_1"/>
+    <exclude body1="finger_holder_2" body2="curr_object"/>
+    <exclude body1="finger_holder_1" body2="curr_object"/>
+
+
+
+
+  </contact>
+
+
+  <actuator>
+    <position name="hand_actuator" joint="hand_slide" kp="1500" kv="50"  ctrlrange="-0.3 0.3"/>
+    <general name="act_finger1" joint="finger1_to_motor1" ctrlrange="-1.22 1.22"/>
+    <position name="act_palm" joint="finger1_slide" ctrlrange="-0.0402 0"  kp="3000" kv="80" />
+    <position name="finger1_friction" joint="finger_insert_slide_1" ctrlrange="-0.001 0.0038" kp="8000" />
+    <general name="act_center_gear" joint="center_gear_joint"  ctrlrange="-1.57 1.57" />
+    <general name="act_finger2" joint="finger2_to_motor2" ctrlrange="-1.22 1.22"/>
+    <position name="finger2_friction" joint="finger_insert_slide_2" ctrlrange="-0.001 0.0038" kp="8000" />
+    <!-- <position name="act_finger1" joint="finger1_to_motor1" kp="200" />
+    <position name="act_finger2" joint="finger2_to_motor2" kp="200" /> -->
+
+  </actuator>
+
+  <sensor>
+    <jointpos name="hand_pos_sensor" joint="hand_slide" />
+    <!-- Finger 1 sensors -->
+    <jointpos name="finger1_pos" joint="finger1_to_motor1" />
+    <jointvel name="finger1_vel" joint="finger1_to_motor1" />
+    <actuatorfrc name="finger1_force" actuator="act_finger1" />
+
+    <!-- Finger 2 sensors -->
+    <jointpos name="finger2_pos" joint="finger2_to_motor2" />
+    <jointvel name="finger2_vel" joint="finger2_to_motor2" />
+    <actuatorfrc name="finger2_force" actuator="act_finger2" />
+
+    <!-- Slide joint sensors -->
+    <jointpos name="finger1_slide_pos" joint="finger1_slide" />
+  </sensor>
+
+  <equality>
+    <!-- finger2_slide = -finger1_slide -->
+    <joint joint1="finger1_slide" joint2="finger2_slide" polycoef="0 1 0 0 0"/>
+  </equality>
+
+
+
+</mujoco>

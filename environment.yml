@@ -1,0 +1,6 @@
+name: mujocoSR
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+prefix: C:\Users\shamb\miniconda3\envs\mujocoSR
