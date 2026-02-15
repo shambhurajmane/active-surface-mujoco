@@ -48,21 +48,21 @@
     <mesh name="hand_c" file=".\assets\BOP_CAD\franka_hand_assets\hand.stl"/>
 
     <!-- Visual meshes -->
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\hand_0.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\hand_1.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\hand_2.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\hand_3.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\hand_4.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\finger_0.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\finger_1.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\hand_0.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\hand_1.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\hand_2.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\hand_3.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\hand_4.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\finger_0.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\finger_1.obj"/>
 
 
-    <mesh name="PandaFingerMount" file=".\assets\BOP_CAD\STL_files\PandaFingerMount.STL"  scale="0.001 0.001 0.001"  />
-    <mesh name="Gt3Belt" file=".\assets\BOP_CAD\STL_files\GT3Belt.STL"  scale="0.001 0.001 0.001"  />
-    <mesh name="FingerSide1" file=".\assets\BOP_CAD\STL_files\BeltFingerSide1.STL"  scale="0.001 0.001 0.001"  />
-    <mesh name="FingerSide2" file=".\assets\BOP_CAD\STL_files\BeltFingerSide2.STL"  scale="0.001 0.001 0.001"  />
+    <mesh name="PandaFingerMount" file="..\..\..\assets\BOP_CAD\STL_files\PandaFingerMount.STL"  scale="0.001 0.001 0.001"  />
+    <mesh name="Gt3Belt" file="..\..\..\assets\BOP_CAD\STL_files\GT3Belt.STL"  scale="0.001 0.001 0.001"  />
+    <mesh name="FingerSide1" file="..\..\..\assets\BOP_CAD\STL_files\BeltFingerSide1.STL"  scale="0.001 0.001 0.001"  />
+    <mesh name="FingerSide2" file="..\..\..\assets\BOP_CAD\STL_files\BeltFingerSide2.STL"  scale="0.001 0.001 0.001"  />
 
-    <mesh name="Hexagon" file=".\assets\test_objects\hex.stl"  scale="0.01 0.01 0.01"  />
+    <mesh name="Hexagon" file="..\..\..\assets\Object_Assets\hex.stl"  scale="0.01 0.01 0.01"  />
 
   </asset>
 

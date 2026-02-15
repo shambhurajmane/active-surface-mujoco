@@ -28,8 +28,8 @@ mujoco-active-surface/
 ├── assets/ # Meshes and CAD models
 │ ├── BOP_CAD/ # CAD models for BOP gripper
 │ ├── VF_CAD/ # CAD models for VF gripper
-│ ├── test_objects/ # Simple test objects
-│ └── YCB_objects/ # YCB object models
+│ ├── Object_Assets/ # Simple test objects
+│ └── YCB_Objects_Test_Cases/ # YCB object models
 │
 ├── mujoco/ # MuJoCo MJCF/XML models
 │ ├── XML_files_for_gripper/ # Gripper XML definitions

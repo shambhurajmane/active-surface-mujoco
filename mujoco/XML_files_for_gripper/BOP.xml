@@ -45,24 +45,24 @@
 
 
     <!-- Collision meshes -->
-    <mesh name="hand_c" file=".\assets\BOP_CAD\franka_hand_assets\hand.stl"/>
+    <mesh name="hand_c" file="..\..\..\assets\BOP_CAD\franka_hand_assets\hand.stl"/>
 
     <!-- Visual meshes -->
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\hand_0.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\hand_1.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\hand_2.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\hand_3.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\hand_4.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\finger_0.obj"/>
-    <mesh file=".\assets\BOP_CAD\franka_hand_assets\finger_1.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\hand_0.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\hand_1.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\hand_2.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\hand_3.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\hand_4.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\finger_0.obj"/>
+    <mesh file="..\..\..\assets\BOP_CAD\franka_hand_assets\finger_1.obj"/>
 
 
-    <mesh name="PandaFingerMount" file=".\assets\BOP_CAD\STL_files\PandaFingerMount.STL"  scale="0.001 0.001 0.001"  />
-    <mesh name="Gt3Belt" file=".\assets\BOP_CAD\STL_files\GT3Belt.STL"  scale="0.001 0.001 0.001"  />
-    <mesh name="FingerSide1" file=".\assets\BOP_CAD\STL_files\BeltFingerSide1.STL"  scale="0.001 0.001 0.001"  />
-    <mesh name="FingerSide2" file=".\assets\BOP_CAD\STL_files\BeltFingerSide2.STL"  scale="0.001 0.001 0.001"  />
+    <mesh name="PandaFingerMount" file="..\..\..\assets\BOP_CAD\STL_files\PandaFingerMount.STL"  scale="0.001 0.001 0.001"  />
+    <mesh name="Gt3Belt" file="..\..\..\assets\BOP_CAD\STL_files\GT3Belt.STL"  scale="0.001 0.001 0.001"  />
+    <mesh name="FingerSide1" file="..\..\..\assets\BOP_CAD\STL_files\BeltFingerSide1.STL"  scale="0.001 0.001 0.001"  />
+    <mesh name="FingerSide2" file="..\..\..\assets\BOP_CAD\STL_files\BeltFingerSide2.STL"  scale="0.001 0.001 0.001"  />
 
-    <mesh name="Hexagon" file=".\assets\test_objects\hex.stl"  scale="0.01 0.01 0.01"  />
+    <mesh name="Hexagon" file="..\..\..\assets\Object_Assets\hex.stl"  scale="0.01 0.01 0.01"  />
 
   </asset>
 
@@ -79,7 +79,7 @@
       <geom type="box" size=".02 .02 .04" rgba="0 .9 0 1" friction="0.1 0.002 0.0001"/>  
       <site name="obj_frame" pos="0 0 0" quat="1 0 0 0" rgba="0 1 0 1" size=".02"/>
     </body> -->
-
+<!-- 
     <body name="curr_object" pos="0.0 0.13 0.1802" quat="0.9659 0 0 0.2588">
     <joint type="free"/>
 
@@ -95,7 +95,7 @@
       quat="1 0 0 0"
       rgba="0 1 0 1"
       size=".002"/>
-  </body>
+  </body> -->
 
     <!-- Spawn a cylindrical object to be grasped -->
     <!-- <body name="cyl_object" pos="0.0 0.13 0.162">
@@ -136,9 +136,9 @@
             <body name="finger_side1_1" pos="0.0027 0.008 0.002" >
               <geom type="mesh" mesh="FingerSide1" name="geom_finger_side_1_1"/>
               <body name="gt3_belt_1_1" pos="0.010 0.0 0.004" > 
-                <geom type="mesh" mesh="Gt3Belt" name="geom_gt3_belt_1_1"/>
+                <geom type="mesh" mesh="Gt3Belt" name="geom_gt3_belt_1_1" rgba="0.8 0.1 0.1 1.0"/>
                 <body name="moving_finger1_1" pos="0.025 0.044 0.001" quat ="0.5 -0.5 0.5 0.5" >
-                  <geom type="box" size="0.0085 0.004 2" rgba="0.8 0.1 0.1 0.3"/>
+                  <geom type="box" size="0.0085 0.004 2" rgba="0.8 0.1 0.1 0.0"/>
                   <joint name="finger1_slide_1" type="slide" axis="0 0 1"
                           range="-3 3" damping="20" armature="0.001" />
                 </body>
@@ -147,9 +147,9 @@
             <body name="finger_side2_1" pos="0.0027 0.008 0.016" >
               <geom type="mesh" mesh="FingerSide2" name="geom_finger_side_2_1"/>
               <body name="gt3_belt_2_1" pos="0.010 0.0 0.002" >
-                <geom type="mesh" mesh="Gt3Belt" name="geom_gt3_belt_2_1"/>
+                <geom type="mesh" mesh="Gt3Belt" name="geom_gt3_belt_2_1" rgba="0.8 0.1 0.1 1.0"/>
                 <body name="moving_finger2_1" pos="0.025 0.044 0.009" quat ="0.5 -0.5 0.5 0.5">
-                  <geom type="box" size="0.0085 0.004 2" rgba="0.8 0.1 0.1 0.3"/>
+                  <geom type="box" size="0.0085 0.004 2" rgba="0.8 0.1 0.1 0.0"/>
                   <joint name="finger2_slide_1" type="slide" axis="0 0 1"
                           range="-3 3" damping="20" armature="0.001" />
                 </body>
@@ -166,9 +166,9 @@
             <body name="finger_side1_2" pos="0.0027 0.008 0.002" >
               <geom type="mesh" mesh="FingerSide1" name="geom_finger_side_1_2"/>
               <body name="gt3_belt_1_2" pos="0.010 0.0 0.004" > 
-                <geom type="mesh" mesh="Gt3Belt" name="geom_gt3_belt_1_2"/>
+                <geom type="mesh" mesh="Gt3Belt" name="geom_gt3_belt_1_2" rgba="0.8 0.1 0.1 1.0"/>
                 <body name="moving_finger1_2" pos="0.025 0.044 0.001" quat ="0.5 -0.5 0.5 0.5">
-                  <geom type="box" size="0.0085 0.004 2" rgba="0.8 0.1 0.1 0.3"/>
+                  <geom type="box" size="0.0085 0.004 2" rgba="0.8 0.1 0.1 0.0"/>
                   <joint name="finger1_slide_2" type="slide" axis="0 0 1"
                           range="-3 3" damping="20" armature="0.001"  />
                 </body>
@@ -177,9 +177,9 @@
             <body name="finger_side2_2" pos="0.0027 0.008 0.016" >
               <geom type="mesh" mesh="FingerSide2" name="geom_finger_side_2_2"/>
               <body name="gt3_belt_2_2" pos="0.010 0.0 0.002" >
-                <geom type="mesh" mesh="Gt3Belt" name="geom_gt3_belt_2_2"/>
+                <geom type="mesh" mesh="Gt3Belt" name="geom_gt3_belt_2_2" rgba="0.8 0.1 0.1 1.0"/>
                 <body name="moving_finger2_2" pos="0.025 0.044 0.009" quat ="0.5 -0.5 0.5 0.5">
-                  <geom type="box" size="0.0085 0.004 2" rgba="0.8 0.1 0.1 0.3"/>
+                  <geom type="box" size="0.0085 0.004 2" rgba="0.8 0.1 0.1 0.0"/>
                   <joint name="finger2_slide_2" type="slide" axis="0 0 1"
                           range="-3 3" damping="20" armature="0.001" />
                 </body>
@@ -256,7 +256,7 @@
     <jointpos name="right_belt_1_sensor" joint="finger2_slide_2" />
     <jointpos name="right_belt_2_sensor" joint="finger1_slide_2" />
 
-    <framepos name ="obj_pos" objtype="body" objname="curr_object" reftype="body" refname="hand"/>
-    <framequat name ="obj_quat" objtype="body" objname="curr_object" reftype="body" refname="hand"/>
+    <!-- <framepos name ="obj_pos" objtype="body" objname="curr_object" reftype="body" refname="hand"/>
+    <framequat name ="obj_quat" objtype="body" objname="curr_object" reftype="body" refname="hand"/> -->
   </sensor>
 </mujoco>

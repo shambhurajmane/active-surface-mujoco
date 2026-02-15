@@ -1,0 +1,64 @@
+
+
+
+
+
+experiments_params:
+  gripper_name: "vf_hand"  # options: ["vf_hand", "bop"]
+  object_name: "gelatin_box"  # simple_objects = ["HexagonBig","HexagonSmall","RectangleBig", "RectangleSmall", "SquareBig", "SquareSmall" ,"Rubik"] 
+            # YCB_Objects_Test_Cases = ["cracker_box","gelatin_box","potted_meat_can","spatula","spoon","tomato_soup_can","gelatin_box_choco"]
+            # Complex_Test_Cases = ["T","L"]
+            # region based cases = ["square_prism", "hexagonal_prism_large", "rectangular_prism_small", 
+            #"rectangular_prism_large", "rectangular_prism_curved"  ,"hexagonal_prism_tall", "hexagonal_prism_small"]
+            # Diffusion_objects = ["Cube", "Hexagon", "Star"]
+            # Hexagon_16_cases
+            # bop_cases =  ["Hexagon_BOP", "T_BOP", "Pentagon_BOP", "Screwdriver_BOP"]
+            # "test" - currenmt generated file from blender
+  case_number: 3
+
+vf_planner_params:
+  resolution: 2 # upto 2 decimal places
+  slide_resolution: 1 # 1cm slide
+  max_finger_spread: 5 # 5 means there can be maxmimum 5 cm difference between object location on left and right finger ie 0 is centered
+  # This parameters ensures worksapce limits of the vf hand
+  pivot_vertical_offset: 3.0  # cm offset to perform vertical pivot
+  pivot_horizontal_offset: 3.5  # cm offset to perform horizontal pivot
+  heuristic_weights: [0,0,1] # ["quat_dist", "eucledian", "l1_norm"]
+  m_factor: 10.0  # scaling factor for the heuristic
+  debug: False
+  rotation_error_margin: 0.1 # np.allclose tolerance for quaternions
+  planner_costs:
+    R_cw : 2
+    R_ccw : 2
+    S_UP : 0.945
+    S_DN : 0.945
+    MOV_UP : 2
+    MOV_DN : 2
+    Pivot : 5
+    SwitchingCost : 0.42 
+    # Execution time for slides : 4 slides = 3.78 sec = each slide = 0.945 sec
+    # Switching time = 0.42 sec each friction state switch
+    # Execution time for rotations : 1.5 sec each average
+
+bop_planner_params:
+  resolution: 2 # upto 2 decimal places
+  slide_resolution: 1 # 1cm slide
+  roll_resolution: 10 # degrees
+  pitch_resolution: 10 # degrees
+  heuristic_weights: [0,0,1] # ["quat_dist", "eucledian", "l1_norm"]
+  m_factor: 6.0  # scaling factor for the heuristic
+  debug: False
+  rotation_error_margin: 0.01 # np.allclose tolerance for quaternions
+  planner_costs:
+    convey : 1
+    roll : 10
+    pitch : 10
+    SwitchingCost : 10
+    # Execution time for slides : 4 slides = 3.78 sec = each slide = 0.945 sec
+    # Switching time = 0.42 sec each friction state switch
+    # Execution time for rotations : 1.5 sec each average
+
+scene_config:
+  home_loc: "0.42957586303353307, -1.561696298700926, -0.9688795319105449, -2.467056808730444, -1.0761918066872491, 1.259599151340893, 2.192077807204689"
+  pick_loc: "0.2869423297705281, -1.6218290668379662, -1.2283300234841177, -2.660455785517107, -1.3023497183057997, 1.4545022885534507, 2.1648726642297373"
+  initial_palm_width: 5 # in cm

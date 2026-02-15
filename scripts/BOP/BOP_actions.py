@@ -192,7 +192,6 @@ class BOPGripper():
 
         object_pos = self.data.sensordata[self.obj_pos_sensor+2]
         init = object_pos
-        print("Initial object Z pos:", object_pos)
         object_target_pos = position + object_pos
         if position < 0:
             step = -step
@@ -210,10 +209,8 @@ class BOPGripper():
 
             object_pos = self.data.sensordata[self.obj_pos_sensor+2]
 
-            print(f"Conveying object, current Z pos: {object_pos}, target Z pos: {object_target_pos}, delta: {abs(object_pos - object_target_pos)}")
             mujoco.mj_step(self.model, self.data)
             self.viewer.sync()
-        print("Final object Z pos:", object_pos)
 
     def pitch_object1(self, rotation=30):
         """
@@ -232,7 +229,6 @@ class BOPGripper():
         current_degrees = quat_to_x_deg(current_quaternion)
         target_degrees = current_degrees + rotation
 
-        print(f"[INIT] current: {current_degrees:.2f}°, target: {target_degrees:.2f}°")
 
         # --- belt step ---
         step = 0.000006
@@ -301,7 +297,6 @@ class BOPGripper():
         target_quat =  q_rotation * current_quaternion
         
 
-        print("current", current_quaternion, "target ", target_quat)
 
         init = current_quaternion
 
@@ -316,7 +311,6 @@ class BOPGripper():
         right_belt2_pos = self.data.sensordata[self.right_belt_2_sensor]
 
         # --- closed-loop control in DEGREE space ---
-        print("initial angle error:",np.rad2deg(quat_angle_error(current_quaternion, target_quat)))
 
         while np.rad2deg(quat_angle_error(current_quaternion, target_quat)) >10:
 
@@ -337,8 +331,6 @@ class BOPGripper():
                                                    self.data.sensordata[self.obj_quat_sensor +2],
                                                    self.data.sensordata[self.obj_quat_sensor +3])
             
-            print("initial angle error:",np.rad2deg(quat_angle_error(current_quaternion, target_quat)))
-            print("changed angle:",np.rad2deg(quat_angle_error(init, current_quaternion)))
 
             self.viewer.sync()
 
@@ -364,7 +356,6 @@ class BOPGripper():
         target_quat =  q_rotation * current_quaternion
         init = current_quaternion
 
-        print("current", current_quaternion, "target ", target_quat)
         # --- belt step ---
         step = 0.000006
         if rotation < 0:
@@ -376,7 +367,6 @@ class BOPGripper():
         right_belt2_pos = self.data.sensordata[self.right_belt_2_sensor]
 
         # --- closed-loop control in DEGREE space ---
-        print("initial angle error:",np.rad2deg(quat_angle_error(current_quaternion, target_quat)))
         count=0
         while np.rad2deg(quat_angle_error(current_quaternion, target_quat)) >11:
 
@@ -398,13 +388,12 @@ class BOPGripper():
                                                    self.data.sensordata[self.obj_quat_sensor +3])
             
             count+=1
-            if count%100==0:
-                print("initial angle error:",np.rad2deg(quat_angle_error(current_quaternion, target_quat)))
-                print("changed angle:",np.rad2deg(quat_angle_error(init, current_quaternion)))
+            # if count%100==0:
+            #     print("initial angle error:",np.rad2deg(quat_angle_error(current_quaternion, target_quat)))
+            #     print("changed angle:",np.rad2deg(quat_angle_error(init, current_quaternion)))
             
             self.viewer.sync()
 
-        print("current", current_quaternion, "target ", target_quat)
 
     def roll_object_clockwise(self, position=0.03): 
         step = 0.00001
@@ -415,7 +404,6 @@ class BOPGripper():
         left_belt1_target_pos = left_belt1_pos + position
 
         while abs(left_belt1_pos - left_belt1_target_pos) > 0.001 :  
-            print(f"Conveying down object, left_belt1 pos: {left_belt1_pos}, left_belt2 pos: {left_belt2_pos}")
             left_belt1_pos += step
             left_belt2_pos += step
             right_belt1_pos -= step

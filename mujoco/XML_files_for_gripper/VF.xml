@@ -19,8 +19,8 @@
     <mesh name='Finger_insert' file='.\assets\VF_CAD\Finger_insert.STL'    />
     <mesh name='Motor_holder' file='.\assets\VF_CAD\Motor_Holder.STL'  />
     <mesh name='center_gear' file='.\assets\VF_CAD\Lower_Gear.STL'  />
-    <mesh name="hexagon" file=".\assets\test_objects\hex.stl" />
-    <mesh name="non_convex_part" file=".\assets\test_objects\non-convex1.STL" scale="0.002 0.002 0.002"/>
+    <mesh name="hexagon" file=".\assets\Object_Assets\hex.stl" />
+    <mesh name="non_convex_part" file=".\assets\Object_Assets\non-convex1.STL" scale="0.002 0.002 0.002"/>
   </asset>
 
 
