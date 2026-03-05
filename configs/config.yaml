@@ -4,17 +4,17 @@
 
 
 experiments_params:
-  gripper_name: "vf_hand"  # options: ["vf_hand", "bop"]
-  object_name: "gelatin_box"  # simple_objects = ["HexagonBig","HexagonSmall","RectangleBig", "RectangleSmall", "SquareBig", "SquareSmall" ,"Rubik"] 
+  gripper_name: "bop"  # options: ["vf_hand", "bop"]
+  object_name: "Hexagon_BOP"  # simple_objects = ["HexagonBig","HexagonSmall","RectangleBig", "RectangleSmall", "SquareBig", "SquareSmall" ,"Rubik"] 
             # YCB_Objects_Test_Cases = ["cracker_box","gelatin_box","potted_meat_can","spatula","spoon","tomato_soup_can","gelatin_box_choco"]
             # Complex_Test_Cases = ["T","L"]
             # region based cases = ["square_prism", "hexagonal_prism_large", "rectangular_prism_small", 
             #"rectangular_prism_large", "rectangular_prism_curved"  ,"hexagonal_prism_tall", "hexagonal_prism_small"]
             # Diffusion_objects = ["Cube", "Hexagon", "Star"]
             # Hexagon_16_cases
-            # bop_cases =  ["Hexagon_BOP", "T_BOP", "Pentagon_BOP", "Screwdriver_BOP"]
+            # bop_cases =  ["Hexagon_BOP", "T_BOP", "BOP_T_2", "Pentagon_BOP", "Screwdriver_BOP", "Cylinder_BOP"]
             # "test" - currenmt generated file from blender
-  case_number: 3
+  case_number: 4
 
 vf_planner_params:
   resolution: 2 # upto 2 decimal places
